@@ -1,0 +1,37 @@
+{
+  "updatedAt": "2026-11-20",
+  "imported": 80,
+  "published": 0,
+  "pending": 80,
+  "relationsImported": 10,
+  "sourcesCount": 39,
+  "auditCounts": {
+    "Source examinée – portée limitée": 32,
+    "Non vérifié individuellement": 8,
+    "Contrôle approfondi requis": 25,
+    "À corriger / reclasser": 15
+  },
+  "sourceConcentration": [
+    {
+      "producer": "indico.math.cnrs.fr",
+      "count": 21
+    },
+    {
+      "producer": "www.elra.info",
+      "count": 8
+    },
+    {
+      "producer": "www.francophonie.org",
+      "count": 5
+    },
+    {
+      "producer": "culture.ec.europa.eu",
+      "count": 2
+    },
+    {
+      "producer": "language-data-space.ec.europa.eu",
+      "count": 2
+    }
+  ],
+  "scope": "Corpus expérimental fourni, non représentatif des politiques linguistiques. Aucun contenu de fiche non validée publié."
+}

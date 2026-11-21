@@ -1,0 +1,6 @@
+node_modules/
+dist/
+private/
+test-results/
+*.log
+.env*
