@@ -6,9 +6,9 @@ export function validateRecord(record){
  if(!record.title?.trim()||!record.summary?.trim())errors.push('Titre et résumé obligatoires');
  try{if(!['https:','http:'].includes(new URL(record.sourceUrl).protocol))throw Error();}catch{errors.push('Source HTTP(S) obligatoire');}
  if(!statuses.includes(record.status))errors.push('Statut inconnu');
- if(record.status==='Validée'&&(!record.validation?.author?.trim()||!record.validation?.reason?.trim()||!record.validation?.evidence?.trim()||!record.verifiedAt))errors.push('Validation : auteur, motif, preuve vérifiée et date obligatoires');
+ if(record.status==='Validée'&&(!record.validation?.author?.trim()||!record.validation?.reason?.trim()||!record.validation?.evidence?.trim()||(!record.verifiedAt&&!(record.validation?.mode==='user_approval'&&record.validation?.date))))errors.push('Validation : auteur, motif, preuve vérifiée et date obligatoires');
  if(record.publicationApproved&&record.status!=='Validée')errors.push('Publication réservée aux fiches validées');
- if(record.publicationApproved&&record.duplicateOf)errors.push('Résoudre le doublon avant publication');
+ if(record.publicationApproved&&record.duplicateOf&&record.duplicateDisposition!=='secondary-source')errors.push('Résoudre le doublon avant publication');
  return errors;
 }
 export function publicCatalog(state){

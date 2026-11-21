@@ -5,7 +5,7 @@ const stateFile=path.join(root,'private/workspace.json');
 const load=()=>JSON.parse(fs.readFileSync(stateFile,'utf8'));
 function persist(state){fs.writeFileSync(stateFile+'.tmp',JSON.stringify(state,null,2));fs.renameSync(stateFile+'.tmp',stateFile);}
 const server=http.createServer(async(req,res)=>{
- res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'");
+ res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'");
  const send=(code,value)=>{res.writeHead(code,{'Content-Type':'application/json; charset=utf-8'});res.end(JSON.stringify(value));};
  if(req.headers.host!==`127.0.0.1:${port}`){send(403,{error:'Hôte refusé'});return;}
  const url=new URL(req.url,`http://127.0.0.1:${port}`);

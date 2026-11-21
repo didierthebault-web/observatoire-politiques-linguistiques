@@ -6,7 +6,7 @@ Prototype expérimental DGLFLF, sans validation institutionnelle. React, TypeScr
 
 `npm ci`, puis `npm run build` et `npm run admin`. Ouvrir http://127.0.0.1:5197/observatoire-politiques-linguistiques/#/administration . Le service écoute exclusivement sur la boucle locale. Le dossier `private/` contient les 80 fiches et 10 hypothèses et reste exclu de Git et du build.
 
-Sur le site public, seules les fiches explicitement validées et autorisées sont accessibles. Le premier jeu public est vide : l’audit ne contient aucune décision de diffusion. Les compteurs agrégés décrivent l’import, jamais une validation ou une tendance représentative.
+Sur le site public, seules les fiches explicitement validées et autorisées sont accessibles. Le corpus public comporte 80 fiches : le demandeur a explicitement validé leur diffusion après examen dans ChatGPT. Cette décision est consignée dans leur historique, sans être présentée comme une nouvelle vérification des sources. Les réserves de l’audit sont conservées. T20 est une source secondaire de T01 et ne doit pas être comptée comme tendance indépendante. Les compteurs agrégés décrivent l’import, jamais une validation ou une tendance représentative.
 
 ## Validation et mise à jour
 
@@ -39,3 +39,7 @@ Les écritures locales exigent un en-tête spécifique, un hôte exact et une or
 RGAA : non audité. Les tests axe ne constituent pas une déclaration de conformité. Contrôles complémentaires requis : lecteur d’écran NVDA, zoom 200/400 %, contraste et compréhension des graphes, formulaires, impression et exports avec technologies d’assistance. Les sélections sont locales au navigateur. Réexamen annuel des profils, rectification/retrait via le responsable du prototype ou le dépôt sans données privées en public.
 
 Voir `docs/migration.md`, `docs/data-dictionary.json` et `docs/tests.md`.
+
+## Présentation des experts
+
+20 profils sont présentés en liste illustrée : portrait à gauche, nom ouvrant la fiche, affiliation, texte documentaire et liens sources. 18 portraits professionnels sourcés sont disponibles. Shu Okabe et Tilahun Yeshambel disposent d’un emplacement « Portrait non disponible » ; aucun visage n’est inventé. Les images et leurs crédits sont associés à chaque fiche. Le texte d’enrichissement et ses références sont distingués du résumé historique. Les dix rapprochements restent des hypothèses privées, la validation du demandeur portant sur les fiches.

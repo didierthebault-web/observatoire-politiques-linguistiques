@@ -7,3 +7,7 @@ Aucune fiche ne bénéficie d’une autorisation de diffusion dans l’audit. 0 
 Dates de collecte conservées, dates de publication inconnues laissées nulles. Deux clôtures sont extraites explicitement du journal : F10 et F12. Aucun financement n’est déclaré ouvert. Scores historiques séparés et signalés comme non revalidés ; aucune nouveauté calculée. Les annotations restent visibles dans l’atelier.
 
 Les fichiers privés sont exclus de Git et du build public. Le rapport détaillé et les empreintes SHA-256 sont disponibles dans private/migration.json.
+
+## Décision de diffusion ultérieure
+
+Le demandeur a explicitement validé les fiches et autorisé leur publication dans la conversation. Les 80 fiches sont diffusées avec leurs réserves, leurs identifiants et l’historique de cette décision. Aucune nouvelle date de vérification de source n’est inventée. T20 est maintenue comme source secondaire de T01. Les dix hypothèses croisées n’ont pas été transformées en relations attestées. Les copies de travail brutes restent privées.

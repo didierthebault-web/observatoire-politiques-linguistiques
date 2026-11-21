@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+const file='private/workspace.json',state=JSON.parse(fs.readFileSync(file,'utf8'));
+const data={
+ E01:['https://ragerri.github.io/images/really.jpg','https://ragerri.github.io/','Page professionnelle de Rodrigo Agerri','Chercheur en traitement automatique des langues au groupe IXA du centre HiTZ. Ses travaux portent sur le traitement multilingue et interlingue, lâ€™extraction dâ€™information et les grands modÃ¨les de langue.'],
+ E02:['https://ekoizpen-zientifikoa.ehu.eus/img/uploaded/2E5726F423DB31D719A0C19B3AFD1012.jpg','https://ekoizpen-zientifikoa.ehu.eus/investigadores/127147/detalle?lang=eu','UniversitÃ© du Pays basque','Profil du corpus consacrÃ© au traitement automatique du basque. Le rÃ©pertoire de lâ€™UniversitÃ© du Pays basque documente son rattachement au dÃ©partement des langages et systÃ¨mes informatiques.'],
+ E03:[null,'https://www.ru.nl/en/people/hiemstra-d','Radboud University',null],
+ E04:['https://ds-informatik.uibk.ac.at/lib/exe/fetch.php?w=200&h=200&tok=576ff8&media=wiki:adam2026b.jpg','https://ds-informatik.uibk.ac.at/doku.php?id=homepageAdam','UniversitÃ© dâ€™Innsbruck','Professeur Ã  lâ€™UniversitÃ© dâ€™Innsbruck, oÃ¹ il dirige le groupe Data Science. Ses recherches portent notamment sur la recherche dâ€™information, les dimensions temporelles des textes et les grands modÃ¨les de langue.'],
+ E05:['https://www.kth.se/files/avatar/jussi','https://www.kth.se/profile/jussi/','KTH — Jussi Karlgren',null],
+ E06:[null,'https://www.centralesupelec.fr/chercheurs/shu-okabe','CentraleSupÃ©lec','Profil en traitement automatique des langues, documentÃ© dans le programme du corpus. Une page professionnelle est Ã©galement disponible dans lâ€™annuaire de recherche de CentraleSupÃ©lec. Lâ€™affiliation TUM du corpus est historique et reste Ã  rapprocher de cette page.'],
+ E07:['https://bplank.github.io/assets/img/avatar.jpg','https://bplank.github.io/','Page professionnelle de Barbara Plank','Profil en traitement automatique des langues Ã  la LMU de Munich. Sa page universitaire prÃ©sente ses activitÃ©s en intelligence artificielle, linguistique informatique et technologies du langage.'],
+ E08:['https://kt.ijs.si/wp-content/uploads/2022/11/Senja-Pollak.jpg','https://kt.ijs.si/members/senja-pollak/','Institut JoÅ¾ef Stefan','Chercheuse en technologies du langage Ã  lâ€™Institut JoÅ¾ef Stefan. Sa page professionnelle dÃ©crit des travaux en traitement automatique des langues, fouille de textes et linguistique de corpus, ainsi que la coordination du projet multilingue EMBEDDIA.'],
+ E09:['https://www.iufrance.fr/assets/images/d/PREVOT%20Laurent-a6b45b8d.jpg','https://www.iufrance.fr/les-membres-de-liuf/membre/1548.html','Institut universitaire de France','Profil en linguistique Ã  Aix-Marseille UniversitÃ©. Sa prÃ©sentation Ã  lâ€™Institut universitaire de France dÃ©crit lâ€™analyse de corpus, avec des mÃ©thodes de traitement automatique des langues et dâ€™analyse statistique.'],
+ E10:['https://www.damianospina.com/author/damiano-spina/avatar_hub9e4a0991cd2c05e9b33a8ba48cdb93e_542664_270x270_fill_q75_h2_lanczos_center_2.webp','https://www.damianospina.com/','Page professionnelle de Damiano Spina','Enseignant-chercheur Ã  RMIT University, dans le domaine de lâ€™accÃ¨s Ã  lâ€™information. Sa page professionnelle prÃ©sente notamment des travaux sur les systÃ¨mes conversationnels et la gÃ©nÃ©ration augmentÃ©e par recherche dâ€™information.'],
+ E12:['https://pauillac.inria.fr/~sagot/img/profile.jpg','https://pauillac.inria.fr/~sagot/','Inria â€” page professionnelle de BenoÃ®t Sagot','Directeur de recherche Inria en traitement automatique des langues et linguistique informatique. Ses travaux documentÃ©s portent sur les modÃ¨les de langue, les corpus et les ressources linguistiques, notamment pour le franÃ§ais.']
+};
+const html=fs.readFileSync('private/portraits/www.elra.info.html','utf8');
+const attr=(tag,name)=>tag.match(new RegExp('\\b'+name+'="([^"]*)"','i'))?.[1];
+for(const r of state.records.filter(r=>r.kind==='experts')){
+ if(Number(r.id.slice(1))>=13){const tag=[...html.matchAll(/<img\b[^>]*>/gi)].map(x=>x[0]).find(t=>(attr(t,'alt')||'').trim()===r.title);if(tag)data[r.id]=[attr(tag,'src'),r.sourceUrl,'ELRA',null];}
+}
+const ru=fs.readFileSync('private/portraits/www.ru.nl.html','utf8');data.E03[0]=attr(ru.match(/<img id="photo"[^>]*>/)?.[0]||'','src')?.replaceAll('&amp;','&');
+fs.mkdirSync('public/portraits',{recursive:true});const log=[];
+for(const r of state.records.filter(r=>r.kind==='experts')){
+ const info=data[r.id];
+ r.profileText=r.id>='E13'?`PrÃ©sence documentÃ©e au conseil de lâ€™ELRA, dans le champ des ressources linguistiques et de leur Ã©valuation. Domaine retenu dans le corpus : ${r.domain.toLowerCase()}. Les compÃ©tences prÃ©cises et lâ€™affiliation actuelle sont Ã  confirmer dans la fiche dÃ©taillÃ©e.`:`Domaine identifiÃ© dans le corpus : ${r.domain.toLowerCase()}. Le programme scientifique citÃ© documente sa prÃ©sence et son affiliation ; les travaux individuels restent Ã  approfondir.`;
+ if(info){const[url,source,credit,text]=info;r.profileSource=source;if(text)r.profileText=text;
+  if(url){try{const response=await fetch(url,{signal:AbortSignal.timeout(15000)});if(!response.ok)throw Error('HTTP '+response.status);const type=response.headers.get('content-type')||'';if(!type.startsWith('image/'))throw Error('Format non image');const ext=type.includes('png')?'png':type.includes('webp')?'webp':'jpg';const path='portraits/'+r.id+'.'+ext;fs.writeFileSync('public/'+path,Buffer.from(await response.arrayBuffer()));r.portrait={url:path,source,credit,originalUrl:url,checkedAt:new Date().toISOString(),rights:'Droits du producteur ; crÃ©dit et lien vers la page professionnelle conservÃ©s.'};log.push({id:r.id,status:'portrait disponible',source});}catch(e){log.push({id:r.id,status:'sans portrait',error:e.message});}}
+  r.history.push({date:new Date().toISOString(),actor:'Enrichissement documentaire',reason:'Ajout dâ€™une prÃ©sentation courte et dâ€™une rÃ©fÃ©rence professionnelle avec portrait quand disponible. Source : '+source});
+ }
+}
+fs.writeFileSync(file,JSON.stringify(state,null,2));fs.writeFileSync('private/portrait-checks.json',JSON.stringify(log,null,2));console.log(JSON.stringify(log));
