@@ -8,5 +8,10 @@
 - Clavier : prise de focus contrôlée ; dialogue natif avec restitution du focus à la fermeture. Parcours manuel exhaustif NVDA et zoom restant à faire.
 - Audit npm : aucune vulnérabilité signalée ; ceci ne constitue pas un audit de sécurité complet et ne couvre pas les avis hors registre npm.
 - Aucun test n’a validé ou autorisé une vraie fiche au nom d’un documentaliste. Le test de publication utilise une fixture isolée, jamais livrée dans les JSON publics.
+- Contrôle HTTP à la demande des 39 URL : 31 réponses accessibles, 8 à examiner manuellement (une 404, une 429, six échecs de récupération). Une réponse HTTP réussie ne valide ni le contenu, ni l’affiliation, ni l’éligibilité. Résultats datés dans le registre privé ; aucune validation modifiée.
 
 Les preuves détaillées, captures et résultats de contrôle des URL restent dans `private/`. L’accessibilité RGAA n’est pas déclarée conforme.
+
+## Déploiement contrôlé
+
+GitHub Actions a terminé avec succès le build, les tests et le déploiement Pages. L’URL publique a ensuite été ouverte dans Chromium : les neuf rubriques sont accessibles, sans erreur JavaScript et sans violation axe sur les vues contrôlées. Le catalogue public comporte zéro fiche, conformément à l’absence de décision de diffusion dans l’audit. Les fonctionnalités de recherche et de validation sont vérifiées dans l’atelier contenant les données privées ; le site public reste une interface de consultation du seul corpus autorisé.

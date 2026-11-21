@@ -1,2 +1,3 @@
 import {publish} from './documentary.mjs';
-console.log(publish(new URL('..',import.meta.url).pathname.replace(/^\/(\w:)/,'$1')));
+import {fileURLToPath} from 'node:url';
+console.log(publish(fileURLToPath(new URL('..',import.meta.url))));
